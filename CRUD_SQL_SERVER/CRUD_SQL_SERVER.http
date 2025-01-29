@@ -1,0 +1,6 @@
+@CRUD_SQL_SERVER_HostAddress = http://localhost:5144
+
+GET {{CRUD_SQL_SERVER_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
