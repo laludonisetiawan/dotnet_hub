@@ -1,3 +1,4 @@
+using CRUD_SQL_SERVER.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
