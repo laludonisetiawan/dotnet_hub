@@ -51,5 +51,34 @@ namespace CRUD_SQL_SERVER.Controllers
             return NotFound("Employee Not Found");
         }
 
+        // update data 
+        [HttpPut]
+        public async Task<ActionResult<Employee>> UpdateEmployee(Employee updateEmployee)
+        {
+            if (updateEmployee != null)
+            {
+                var employee = await appDbContext.Employees.FirstOrDefaultAsync(e => e.Id == updateEmployee.Id);
+                employee.Name = updateEmployee.Name;
+                employee.Age = updateEmployee.Age;
+                await appDbContext.SaveChangesAsync();
+                return Ok(employee);
+            }
+            return BadRequest();
+        }
+
+        // delete data
+        [HttpDelete]
+        public async Task<ActionResult<List<Employee>>> DeleteEmployee(int id)
+        {
+            var employee = await appDbContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            if (employee !=null)
+            {
+                appDbContext.Employees.Remove(employee);
+                await appDbContext.SaveChangesAsync();
+                return Ok(await appDbContext.Employees.ToListAsync());
+            }
+            return NotFound();
+        }
+
     }
 }
